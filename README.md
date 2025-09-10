@@ -23,9 +23,13 @@ Il s’agit d’une application Node.js avec Express et MySQL, organisée en arc
 
 3. Créer un fichier .env : 
     DB_HOST=localhost
+
     DB_PORT=3306
+
     DB_USER=root
+
     DB_PASSWORD=
+    
     DB_NAME=portal_asso_db
 
     JWT_SECRET=secret
