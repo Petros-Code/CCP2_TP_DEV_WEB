@@ -1,0 +1,25 @@
+{
+  "name": "portalasso",
+  "version": "1.0.0",
+  "description": "Exam CCP2",
+  "license": "ISC",
+  "author": "petros-Code",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node ./core/seed.js"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "argon2": "^0.44.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.5",
+    "path": "^0.12.7",
+    "uuid4": "^2.0.3"
+  }
+}
