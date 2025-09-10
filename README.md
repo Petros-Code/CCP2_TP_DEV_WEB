@@ -35,11 +35,17 @@ Il s’agit d’une application Node.js avec Express et MySQL, organisée en arc
 
 ### 📂 Structure
 ├── core/           # Routes Express
+
 ├── middlewares/    # Auth / Rôle / errorHandler
+
 ├── module/         # CRUD
+
 ├── routes/         # Routes Express
+
 ├── scripts/        # scripts SQL
+
 ├── validators/     # Validation JOI
+
 └── index.js        # Point d’entrée
 
 #### 👨‍💻 Auteur
