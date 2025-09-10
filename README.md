@@ -29,7 +29,7 @@ Il s’agit d’une application Node.js avec Express et MySQL, organisée en arc
     DB_USER=root
 
     DB_PASSWORD=
-    
+
     DB_NAME=portal_asso_db
 
     JWT_SECRET=secret
@@ -37,7 +37,7 @@ Il s’agit d’une application Node.js avec Express et MySQL, organisée en arc
 4. Lancer le serveur : 
     npm run dev
 
-### 📂 Structure
+## 📂 Structure
 ├── core/           # Routes Express
 
 ├── middlewares/    # Auth / Rôle / errorHandler
@@ -52,5 +52,5 @@ Il s’agit d’une application Node.js avec Express et MySQL, organisée en arc
 
 └── index.js        # Point d’entrée
 
-#### 👨‍💻 Auteur
-Projet réalisé par Petros – Examen CCP2 Développement Web.
+### 👨‍💻 Auteur
+**Projet** réalisé par **Petros-Code** – Examen CCP2 TP Développeur Web & Mobile.
