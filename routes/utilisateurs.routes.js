@@ -9,7 +9,8 @@ const userController = new UserController(userRepository);
 
 // --- Routes publiques ---
 router.post("/register", (req, res) => userController.register(req, res));
-
+router.post("/login", (req, res) => userController.login(req, res));
+router.post("/logout", (req, res) => userController.logout(req, res));
 
 
 

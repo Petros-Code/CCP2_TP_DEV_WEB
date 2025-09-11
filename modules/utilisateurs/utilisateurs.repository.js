@@ -21,6 +21,21 @@ class UserRepository {
         }
     }
 
+    async getUserByEmail(email) {
+        const [rows] = await this.pool.query("SELECT * FROM utilisateurs WHERE email = ?", [email]);
+        return rows[0] || null;
+    }
+
+    async login(email, mot_de_passe) {
+        const user = await this.getUserByEmail(email);
+        if (!user) return null;
+    
+        const isValid = await argon2.verify(user.mot_de_passe, mot_de_passe);
+        if (!isValid) return null;
+    
+        return { id: user.id, name: user.name, email: user.email };
+    }
+
 }
 
 export default UserRepository;
