@@ -1,14 +1,20 @@
 import express from "express";
 import pool from "./core/config.js";
+import dotenv from "dotenv";
+
+import userRoute from "./routes/utilisateurs.routes.js";
+
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
 
 //Middlewares globaux
 app.use(express.json());
 
 //Routes
-
+app.use("/users", userRoute);
 
 //HealthCheck & Co
 app.get("/bienvenue", (req, res) => {
