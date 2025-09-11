@@ -2,7 +2,8 @@ import express from "express";
 import pool from "./core/config.js";
 import dotenv from "dotenv";
 
-import userRoute from "./routes/utilisateurs.routes.js";
+import userRoutes from "./routes/utilisateurs.routes.js";
+import missionRoutes from "./routes/missions.routes.js";
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 //Routes
-app.use("/users", userRoute);
+app.use("/users", userRoutes);
+app.use("/missions", missionRoutes);
 
 //HealthCheck & Co
 app.get("/bienvenue", (req, res) => {
