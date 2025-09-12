@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import userRoutes from "./routes/utilisateurs.routes.js";
 import missionRoutes from "./routes/missions.routes.js";
+import candidatureRoutes from "./routes/candidatures.routes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 //Routes
 app.use("/users", userRoutes);
 app.use("/missions", missionRoutes);
+app.use("/candidatures", candidatureRoutes);
 
 //HealthCheck & Co
 app.get("/bienvenue", (req, res) => {
