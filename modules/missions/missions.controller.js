@@ -48,6 +48,22 @@ class MissionController {
       }
     }
 
+    async deleteMission(req, res) {
+      try {
+        const { id } = req.params;
+        const deleted = await this.missionRepository.deleteMission(id);
+  
+        if (!deleted) {
+          return res.status(404).json({ error: "Mission non trouvée" });
+        }
+  
+        res.json({ message: "Mission supprimée avec succès" });
+      } catch (error) {
+        console.error("Erreur lors de la suppression de la mission :", error);
+        res.status(500).json({ error: "Erreur serveur" });
+      }
+    }
+
   }
   
   export default MissionController;

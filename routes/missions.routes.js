@@ -10,5 +10,5 @@ const missionController = new MissionController(missionRepository);
 // --- Routes à protéger ---
 router.post("/create", (req, res) => missionController.createMission(req, res));
 router.patch("/:id", (req, res) => missionController.updateMission(req, res));
-
+router.delete("/:id", (req, res) => missionController.deleteMission(req, res));
 export default router;

@@ -43,6 +43,19 @@ class MissionRepository {
         }
       }
 
+      async deleteMission(id) {
+        try {
+          const [result] = await this.pool.execute(
+            `DELETE FROM missions WHERE id = ?`,
+            [id]
+          );
+    
+          return result.affectedRows > 0;
+        } catch (error) {
+          throw new Error("Erreur lors de la suppression de la mission : " + error.message);
+        }
+      }
+
 }
 
 export default MissionRepository;
