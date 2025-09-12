@@ -64,6 +64,16 @@ class MissionController {
       }
     }
 
+    async getAllMissions(req, res) {
+      try {
+        const missions = await this.missionRepository.getAllMissions();
+        res.status(200).json(missions);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des missions : ", error);
+        res.status(500).json({ error: "Erreur Serveur" });
+      }
+    }
+
   }
   
   export default MissionController;

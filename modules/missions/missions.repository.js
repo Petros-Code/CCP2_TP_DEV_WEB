@@ -56,6 +56,21 @@ class MissionRepository {
         }
       }
 
+      async getAllMissions() {
+        try {
+        const [rows] = await this.pool.execute(`
+          SELECT m.id, m.titre, m.description, m.date_de_creation, m.max_benevoles, u.nom AS association_nom
+          FROM missions m
+          JOIN utilisateurs u ON m.association_id = u.id
+          ORDER BY m.date_de_creation DESC
+          `);
+          return rows;
+            } catch (error) {
+            throw new Error("Erreur lors de la récupération des missions : " + error.message);
+            }
+          }
+
+
 }
 
 export default MissionRepository;
