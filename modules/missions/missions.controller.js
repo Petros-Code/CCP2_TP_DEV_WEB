@@ -24,6 +24,30 @@ class MissionController {
         res.status(500).json({ error: "Erreur serveur" });
       }
     }
+
+    async updateMission(req, res) {
+      try {
+        const { id } = req.params;
+        const { titre, description, max_benevoles } = req.body;
+  
+        const fields = {};
+        if (titre) fields.titre = titre;
+        if (description) fields.description = description;
+        if (max_benevoles) fields.max_benevoles = max_benevoles;
+  
+        const updated = await this.missionRepository.updateMission(id, fields);
+  
+        if (!updated) {
+          return res.status(404).json({ error: "Mission non trouvée ou aucune modification" });
+        }
+  
+        res.json({ message: "Mission mise à jour avec succès" });
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour de la mission :", error);
+        res.status(500).json({ error: "Erreur serveur" });
+      }
+    }
+
   }
   
   export default MissionController;

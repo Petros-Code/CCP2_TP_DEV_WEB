@@ -24,6 +24,24 @@ class MissionRepository {
         }
       }  
 
+      async updateMission(id, fields) {
+        try {
+          const keys = Object.keys(fields);
+          if (keys.length === 0) return null;
+    
+          const updates = keys.map((key) => `${key} = ?`).join(", ");
+          const values = Object.values(fields);
+    
+          const [result] = await this.pool.execute(
+            `UPDATE missions SET ${updates} WHERE id = ?`,
+            [...values, id]
+          );
+    
+          return result.affectedRows > 0;
+        } catch (error) {
+          throw new Error("Erreur lors de la mise à jour de la mission : " + error.message);
+        }
+      }
 
 }
 
