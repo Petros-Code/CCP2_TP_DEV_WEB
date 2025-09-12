@@ -27,21 +27,43 @@ class CandidatureRepository {
         }
     }
 
-    // async acceptApply() {
-    //     try {
+    async acceptApply(candidatureId) {
+        try {
+            const [result] = await this.pool.query(
+                `UPDATE candidatures
+                SET statut = 'ACCEPTEE'
+                WHERE id = ?`,
+                [candidatureId]
+            );
 
-    //     } catch (error) {
-            
-    //     }
-    // }
+            if(result.affectedRows === 0) {
+                throw new Error("Candidature introuvable.");
+            }
 
-    // async rejectApply() {
-    //     try {
+            return { id: candidatureId, statut: "ACCEPTEE" };
+        } catch (error) {
+            throw new Error("Erreur lors de l'acceptation : " + error.message);
+        }
+    }
 
-    //     } catch (error) {
-            
-    //     }
-    // }
+    async rejectApply(candidatureId) {
+        try {
+            const [result] = await this.pool.query(
+                `UPDATE candidatures
+                SET statut = 'REFUSEE'
+                WHERE id = ?`,
+                [candidatureId]
+            );
+
+            if(result.affectedRows === 0) {
+                throw new Error("Candidature introuvable.");
+            }
+
+            return { id: candidatureId, statut: "REFUSEE" };
+        } catch (error) {
+            throw new Error("Erreur lors du refus : " + error.message);
+        }
+    }
 }
 
 export default CandidatureRepository;

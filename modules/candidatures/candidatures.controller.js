@@ -27,22 +27,27 @@ class CandidatureController {
         }
     }
 
+    async acceptApply(req, res) {
+        try {
+            const candidatureId = req.params.id;
+            const candidature = await this.candidatureRepository.acceptApply(candidatureId);
 
+            res.json(candidature);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 
+    async rejectApply(req, res) {
+        try {
+            const candidatureId = req.params.id;
+            const candidature = await this.candidatureRepository.rejectApply(candidatureId);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            res.json(candidature);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
 
 }
 

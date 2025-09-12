@@ -11,6 +11,7 @@ const candidatureController = new CandidatureController(candidatureRepository);
 router.post("/apply", (req, res) => candidatureController.apply(req, res));
 
 // --- Routes "rôle = ASSOCIATION" ---
-
+router.patch("/:id/accept", (req, res) => candidatureController.acceptApply(req, res));
+router.patch("/:id/reject", (req, res) => candidatureController.rejectApply(req, res));
 
 export default router;
