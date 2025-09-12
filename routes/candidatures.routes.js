@@ -7,11 +7,14 @@ const router = Router();
 const candidatureRepository = new CandidatureRepository(pool);
 const candidatureController = new CandidatureController(candidatureRepository);
 
+import authMiddleware from "../middlewares/auth.js";
+
 // --- Routes "rôle = BENEVOLE" ---
-router.post("/apply", (req, res) => candidatureController.apply(req, res));
+router.post("/apply", authMiddleware, (req, res) => candidatureController.apply(req, res));
 
 // --- Routes "rôle = ASSOCIATION" ---
-router.patch("/:id/accept", (req, res) => candidatureController.acceptApply(req, res));
-router.patch("/:id/reject", (req, res) => candidatureController.rejectApply(req, res));
+router.patch("/:id/accept", authMiddleware, (req, res) => candidatureController.acceptApply(req, res));
+router.patch("/:id/reject", authMiddleware, (req, res) => candidatureController.rejectApply(req, res));
+router.get("/association/:id", authMiddleware, (req, res) => candidatureController.getAllApplies(req, res));
 
 export default router;

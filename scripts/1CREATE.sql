@@ -1,6 +1,11 @@
 CREATE DATABASE IF NOT EXISTS PORTAL_ASSO_DB;
 USE PORTAL_ASSO_DB;
 
+DROP TABLE IF EXISTS candidatures;
+DROP TABLE IF EXISTS missions;
+DROP TABLE IF EXISTS utilisateurs;
+
+
 CREATE TABLE IF NOT EXISTS utilisateurs (
     id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
     nom VARCHAR(100) NOT NULL,
@@ -26,6 +31,6 @@ CREATE TABLE IF NOT EXISTS candidatures (
     statut ENUM('EN_ATTENTE', 'ACCEPTEE', 'REFUSEE') DEFAULT 'EN_ATTENTE',
     date_de_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (benevole_id) REFERENCES utilisateurs(id),
-    FOREIGN KEY (mission_id) REFERENCES missions(id),
+    FOREIGN KEY (mission_id) REFERENCES missions(id) ON DELETE CASCADE,
     UNIQUE (benevole_id, mission_id)
 );

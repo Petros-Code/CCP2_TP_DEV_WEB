@@ -64,6 +64,26 @@ class CandidatureRepository {
             throw new Error("Erreur lors du refus : " + error.message);
         }
     }
+
+    async getAllApplies(associationId) {
+        try {
+            const [rows] = await this.pool.query(`
+                SELECT c.id, c.statut, c.date_de_creation,
+                u.id AS benevole_id, u.nom AS benevole_nom, u.email AS benevole_email,
+                m.id AS mission_id, m.titre AS mission_titre
+                FROM candidatures c
+                JOIN utilisateurs u ON c.benevole_id = u.id
+                JOIN missions m ON c.mission_id = m.id
+                WHERE m.association_id = ?
+                ORDER BY c.date_de_creation DESC
+                `,
+                [associationId]
+            );
+            return rows;
+        } catch (error) {
+            throw new Error("Erreur lors de la récupération des candidatures : " + error.message);
+        }
+    }
 }
 
 export default CandidatureRepository;

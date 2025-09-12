@@ -49,6 +49,15 @@ class CandidatureController {
         }
     }
 
+    async getAllApplies(req, res) {
+        try {
+          const associationId = req.params.id;
+          const candidatures = await this.candidatureRepository.getAllApplies(associationId);
+          res.json(candidatures);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+      }    
 }
 
 export default CandidatureController;

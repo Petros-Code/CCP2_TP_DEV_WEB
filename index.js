@@ -1,6 +1,7 @@
 import express from "express";
 import pool from "./core/config.js";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import userRoutes from "./routes/utilisateurs.routes.js";
 import missionRoutes from "./routes/missions.routes.js";
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3000;
 
 //Middlewares globaux
 app.use(express.json());
+app.use(cookieParser());
 
 //Routes
 app.use("/users", userRoutes);

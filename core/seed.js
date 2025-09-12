@@ -64,7 +64,7 @@ const seed = async () => {
         );
         const benevolesIds = benevolesRows.map((b) => b.id);
 
-        console.log(`${benevolesIds.length} associations créées`);
+        console.log(`${benevolesIds.length} bénévoles créées`);
 
         //Insérer des missions
         const missionsIds = [];

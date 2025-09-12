@@ -54,7 +54,7 @@ class UserController {
             httpOnly: true,
             secure: process.env.ENV === "production",
             sameSite: "strict",
-            maxAge: 3 * 60 * 60 * 1000, // 3h
+            maxAge: 3 * 60 * 60 * 1000,
           });
     
           res.status(200).json({
