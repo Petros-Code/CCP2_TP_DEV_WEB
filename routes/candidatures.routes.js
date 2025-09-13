@@ -9,9 +9,11 @@ const candidatureController = new CandidatureController(candidatureRepository);
 
 import authMiddleware from "../middlewares/auth.js";
 import checkRole from "../middlewares/role.js";
+import validateMiddleware from "../middlewares/validate.js";
+import candidatureSchema from "../validators/candidatures.joi.js";
 
 // --- Routes "rôle = BENEVOLE" ---
-router.post("/apply", authMiddleware, checkRole(["BENEVOLE"]), (req, res) => candidatureController.apply(req, res));
+router.post("/apply", authMiddleware, checkRole(["BENEVOLE"]), validateMiddleware(candidatureSchema), (req, res) => candidatureController.apply(req, res));
 
 // --- Routes "rôle = ASSOCIATION" ---
 router.patch("/:id/accept", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => candidatureController.acceptApply(req, res));

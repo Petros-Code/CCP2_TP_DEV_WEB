@@ -9,12 +9,14 @@ const missionController = new MissionController(missionRepository);
 
 import authMiddleware from "../middlewares/auth.js";
 import checkRole from "../middlewares/role.js";
+import validateMiddleware from "../middlewares/validate.js";
+import missionSchema from "../validators/missions.joi.js";
 
 // --- Routes "publiques" ---
 router.get("/", (req, res) => missionController.getAllMissions(req, res));
 
 // --- Routes à protéger ---
-router.post("/create", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => missionController.createMission(req, res));
+router.post("/create", authMiddleware, checkRole(["ASSOCIATION"]), validateMiddleware(missionSchema), (req, res) => missionController.createMission(req, res));
 router.patch("/:id", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => missionController.updateMission(req, res));
 router.delete("/:id", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => missionController.deleteMission(req, res));
 

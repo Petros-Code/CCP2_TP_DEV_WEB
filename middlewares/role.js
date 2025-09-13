@@ -22,7 +22,7 @@ const checkRole = (allowedRoles) => {
             const userRole = rows[0].role;
 
             if(!allowedRoles.includes(userRole)) {
-                return res.status(403).json({ message: "Accès interdit : rôle insuffisant" });
+                return res.status(403).json({ message: "Accès interdit : rôle inadéquat" });
             }
 
             next();

@@ -1,13 +1,15 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import pool from "./core/config.js";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import userRoutes from "./routes/utilisateurs.routes.js";
 import missionRoutes from "./routes/missions.routes.js";
 import candidatureRoutes from "./routes/candidatures.routes.js";
 
-dotenv.config();
+import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,7 +41,7 @@ app.get("/bienvenue", (req, res) => {
     }
   });
 
-  //errorHandler
+  app.use(errorHandler);
 
   app.listen(port, () => {
     console.log(`Le serveur tourne sur : http://localhost:${port}`);
