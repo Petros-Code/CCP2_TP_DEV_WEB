@@ -52,6 +52,11 @@ class CandidatureController {
     async getAllApplies(req, res) {
         try {
           const associationId = req.params.id;
+
+          if (req.auth.id !== associationId) {
+            return res.status(403).json({ message: "Accès interdit" });
+          } 
+
           const candidatures = await this.candidatureRepository.getAllApplies(associationId);
           res.json(candidatures);
         } catch (error) {
