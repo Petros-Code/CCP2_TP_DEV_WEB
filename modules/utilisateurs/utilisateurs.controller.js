@@ -5,7 +5,7 @@ class UserController {
         this.userRepository = userRepository;
     }
 
-    async register(req, res) {
+    async register(req, res, next) {
         try {
           const { nom, email, mot_de_passe, role } = req.body;
           
@@ -19,22 +19,26 @@ class UserController {
     
           res.status(201).json({ message: "Utilisateur créé avec succès", user: newUser });
         } catch (error) {
-          res.status(400).json({ error: error.message });
+          next(error);
         }
     }
 
-    async getUserByEmail(req, res) {
+    async getUserByEmail(req, res, next) {
         try {
             const { email } = req.params;
             const user = await this.userRepository.getUserByEmail(email);
-            if (!user) return res.status(404).json({ error: "Utilisateur non trouvé" });
+            if (!user) {
+                const err = new Error("Utilisateur non trouvé");
+                err.status = 404;
+                throw err;
+            }
             res.status(200).json({ user })
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            next(error);
         }
     }
 
-    async login(req, res) {
+    async login(req, res, next) {
         try {
           const { email, mot_de_passe } = req.body;
     
@@ -42,7 +46,11 @@ class UserController {
             return res.status(400).json({ error: "Email et mot de passe requis" });
     
           const user = await this.userRepository.login(email, mot_de_passe);
-          if (!user) return res.status(401).json({ error: "Identifiants incorrects" });
+          if (!user) {
+            const err = new Error("Identifiants incorrects");
+            err.status = 401;
+            throw err;
+          }
     
           const token = jwt.sign(
             { id: user.id },
@@ -62,8 +70,7 @@ class UserController {
             user: { id: user.id, email: user.email },
           });
         } catch (error) {
-          console.error("Erreur loginController :", error);
-          res.status(500).json({ error: "Erreur serveur" });
+          next(error);
         }
     }
 

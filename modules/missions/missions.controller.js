@@ -3,7 +3,7 @@ class MissionController {
       this.missionRepository = missionRepository;
     }
   
-    async createMission(req, res) {
+    async createMission(req, res, next) {
       try {
         const { titre, description, association_id, max_benevoles } = req.body;
   
@@ -20,12 +20,11 @@ class MissionController {
   
         res.status(201).json({ message: "Mission créée avec succès", mission });
       } catch (error) {
-        console.error("Erreur lors de la création de la mission :", error);
-        res.status(500).json({ error: "Erreur serveur" });
+        next(error);
       }
     }
 
-    async updateMission(req, res) {
+    async updateMission(req, res, next) {
       try {
         const { id } = req.params;
         const { titre, description, max_benevoles } = req.body;
@@ -38,39 +37,40 @@ class MissionController {
         const updated = await this.missionRepository.updateMission(id, fields);
   
         if (!updated) {
-          return res.status(404).json({ error: "Mission non trouvée ou aucune modification" });
+          const err = new Error("Mission non trouvée ou aucune modification");
+          err.status = 404;
+          throw err;
         }
   
         res.json({ message: "Mission mise à jour avec succès" });
       } catch (error) {
-        console.error("Erreur lors de la mise à jour de la mission :", error);
-        res.status(500).json({ error: "Erreur serveur" });
+        next(error);
       }
     }
 
-    async deleteMission(req, res) {
+    async deleteMission(req, res, next) {
       try {
         const { id } = req.params;
         const deleted = await this.missionRepository.deleteMission(id);
   
         if (!deleted) {
-          return res.status(404).json({ error: "Mission non trouvée" });
+          const err = new Error("Mission non trouvée");
+          err.status = 404;
+          throw err;
         }
   
         res.json({ message: "Mission supprimée avec succès" });
       } catch (error) {
-        console.error("Erreur lors de la suppression de la mission :", error);
-        res.status(500).json({ error: "Erreur serveur" });
+        next(error);
       }
     }
 
-    async getAllMissions(req, res) {
+    async getAllMissions(req, res, next) {
       try {
         const missions = await this.missionRepository.getAllMissions();
         res.status(200).json(missions);
       } catch (error) {
-        console.error("Erreur lors de la récupération des missions : ", error);
-        res.status(500).json({ error: "Erreur Serveur" });
+        next(error);
       }
     }
 

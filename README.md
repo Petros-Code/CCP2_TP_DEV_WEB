@@ -19,7 +19,7 @@ Il s’agit d’une application Node.js avec Express et MySQL, organisée en arc
    cd CCP2_TP_DEV_WEB
 
 2. Installer les dépendances :
-    npm install
+    npm install argon2 cookie-parser dotenv express joi jsonwebtoken mysql2 faker-js
 
 3. Créer un fichier .env : 
     DB_HOST=localhost

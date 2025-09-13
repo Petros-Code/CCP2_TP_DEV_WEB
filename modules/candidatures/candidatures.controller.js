@@ -3,7 +3,7 @@ class CandidatureController {
         this.candidatureRepository = candidatureRepository;
     }
 
-    async apply(req, res) {
+    async apply(req, res, next) {
         try {
             const { benevole_id, mission_id } = req.body;
 
@@ -22,45 +22,46 @@ class CandidatureController {
               });
 
         } catch (error) {
-            console.error("Erreur lors de l'application :", error);
-            res.status(400).json({ error: error.message });
+            next(error);
         }
     }
 
-    async acceptApply(req, res) {
+    async acceptApply(req, res, next) {
         try {
             const candidatureId = req.params.id;
             const candidature = await this.candidatureRepository.acceptApply(candidatureId);
 
             res.json(candidature);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            next(error);
         }
     }
 
-    async rejectApply(req, res) {
+    async rejectApply(req, res, next) {
         try {
             const candidatureId = req.params.id;
             const candidature = await this.candidatureRepository.rejectApply(candidatureId);
 
             res.json(candidature);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            next(error);
         }
     }
 
-    async getAllApplies(req, res) {
+    async getAllApplies(req, res, next) {
         try {
           const associationId = req.params.id;
 
           if (req.auth.id !== associationId) {
-            return res.status(403).json({ message: "Accès interdit" });
+            const err = new Error("Accès interdit");
+            err.status = 403;
+            throw err;
           } 
 
           const candidatures = await this.candidatureRepository.getAllApplies(associationId);
           res.json(candidatures);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            next(error);
         }
       }    
 }

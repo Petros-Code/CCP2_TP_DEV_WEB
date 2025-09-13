@@ -13,11 +13,11 @@ import validateMiddleware from "../middlewares/validate.js";
 import candidatureSchema from "../validators/candidatures.joi.js";
 
 // --- Routes "rôle = BENEVOLE" ---
-router.post("/apply", authMiddleware, checkRole(["BENEVOLE"]), validateMiddleware(candidatureSchema), (req, res) => candidatureController.apply(req, res));
+router.post("/apply", authMiddleware, checkRole(["BENEVOLE"]), validateMiddleware(candidatureSchema), (req, res, next) => candidatureController.apply(req, res, next));
 
 // --- Routes "rôle = ASSOCIATION" ---
-router.patch("/:id/accept", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => candidatureController.acceptApply(req, res));
-router.patch("/:id/reject", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => candidatureController.rejectApply(req, res));
-router.get("/association/:id", authMiddleware, checkRole(["ASSOCIATION"]), (req, res) => candidatureController.getAllApplies(req, res));
+router.patch("/:id/accept", authMiddleware, checkRole(["ASSOCIATION"]), (req, res, next) => candidatureController.acceptApply(req, res, next));
+router.patch("/:id/reject", authMiddleware, checkRole(["ASSOCIATION"]), (req, res, next) => candidatureController.rejectApply(req, res, next));
+router.get("/association/:id", authMiddleware, checkRole(["ASSOCIATION"]), (req, res, next) => candidatureController.getAllApplies(req, res, next));
 
 export default router;
