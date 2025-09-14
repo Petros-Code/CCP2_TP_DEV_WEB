@@ -33,7 +33,7 @@ class UserRepository {
         const isValid = await argon2.verify(user.mot_de_passe, mot_de_passe);
         if (!isValid) return null;
     
-        return { id: user.id, name: user.name, email: user.email };
+        return { id: user.id, nom: user.nom, email: user.email };
     }
 
 }
