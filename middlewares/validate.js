@@ -12,7 +12,7 @@ const validateMiddleware = (schema) => {
         });
       }
   
-      req.body = value; //req.body devient la version validé
+      req.body = value;
       next();
     };
   };
