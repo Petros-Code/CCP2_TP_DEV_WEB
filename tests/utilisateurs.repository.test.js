@@ -23,7 +23,7 @@ describe("UserRepository - Méthode login", () => {
     simulationBaseDeDonnees.query.mockResolvedValueOnce([[
       { 
         id: 1, 
-        name: "Jean Dupont", 
+        nom: "Jean Dupont", 
         email: "jean@example.com", 
         mot_de_passe: motDePasseHashe 
       }
@@ -33,7 +33,7 @@ describe("UserRepository - Méthode login", () => {
     
     expect(resultat).toEqual({ 
       id: 1, 
-      name: "Jean Dupont", 
+      nom: "Jean Dupont", 
       email: "jean@example.com" 
     });
   });
@@ -47,7 +47,7 @@ describe("UserRepository - Méthode login", () => {
     simulationBaseDeDonnees.query.mockResolvedValueOnce([[
       { 
         id: 1, 
-        name: "Jean Dupont", 
+        nom: "Jean Dupont", 
         email: "jean@example.com", 
         mot_de_passe: motDePasseHashe 
       }
