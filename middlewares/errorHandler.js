@@ -3,13 +3,6 @@ import Joi from "joi";
 const errorHandler = (err, req, res, next) => {
   console.error("Erreur :", err.message);
 
-  if (err instanceof Joi.ValidationError) {
-    return res.status(400).json({
-      error: "Erreur de validation",
-      details: err.details.map((detail) => detail.message),
-    });
-  }
-
   if (err.status === 400) {
     return res.status(400).json({ error: "Requête invalide", details: err.message });
   }
