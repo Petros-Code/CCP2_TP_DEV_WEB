@@ -94,7 +94,19 @@ npm run test:watch
 
 ---
 
-## Endpoints API
+## Documentation API
+
+### Documentation interactive Swagger
+Une documentation interactive complète est disponible à l'adresse :
+**http://localhost:3000/api-docs**
+
+Cette documentation permet de :
+- ✅ **Tester les endpoints** directement dans le navigateur
+- ✅ **Voir les exemples** de requêtes et réponses
+- ✅ **Comprendre** la structure des données
+- ✅ **Authentifier** avec les cookies JWT
+
+### Endpoints API
 
 ### Utilisateurs
 - `POST /utilisateurs/register` - Inscription

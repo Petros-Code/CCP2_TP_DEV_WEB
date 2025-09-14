@@ -10,6 +10,7 @@ import missionRoutes from "./routes/missions.routes.js";
 import candidatureRoutes from "./routes/candidatures.routes.js";
 
 import errorHandler from "./middlewares/errorHandler.js";
+import { swaggerUi, specs } from "./core/swagger.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,8 +20,14 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cookieParser());
 
+// Documentation Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: "PortalAsso API Documentation"
+}));
+
 //Routes
-app.use("/users", userRoutes);
+app.use("/utilisateurs", userRoutes);
 app.use("/missions", missionRoutes);
 app.use("/candidatures", candidatureRoutes);
 
