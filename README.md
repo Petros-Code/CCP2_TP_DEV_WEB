@@ -1,6 +1,6 @@
 # PortalAsso
 
-> **API REST pour la gestion d'associations et de missions bénévoles**
+> **API REST pour la gestion de missions associatives, proposées à des bénévoles**
 
 Projet réalisé dans le cadre de l'examen **CCP2 – Développement Web Back-End**.  
 Application Node.js avec Express et MySQL, organisée en architecture en couches (routes, contrôleurs, repositories).
